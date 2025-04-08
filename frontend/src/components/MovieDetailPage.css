@@ -1,0 +1,163 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap");
+
+.movie-detail-container {
+  width: 100%;
+  min-height: 100vh;
+  font-family: "Inter", sans-serif;
+  background: linear-gradient(to right, #028ea6, #e4e900);
+  position: relative;
+  overflow-y: auto;
+  max-height: 100vh;
+}
+
+.movie-detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  background-color: #1a1a1a;
+}
+
+.movie-detail-logo {
+  color: #fff;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.movie-detail-nav {
+  display: flex;
+  align-items: center;
+}
+
+.profile-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: white;
+  transition: background-color 0.2s ease;
+}
+
+.profile-icon:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.profile-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.movie-detail-content {
+  display: flex;
+  padding: 40px;
+  gap: 40px;
+  min-height: calc(100vh - 200px);
+  overflow-y: auto;
+}
+
+.movie-poster-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.movie-poster-placeholder {
+  width: 300px;
+  height: 400px;
+  background-color: #2a2a2a;
+  border-radius: 8px;
+}
+
+.star-rating-container {
+  display: flex;
+  gap: 5px;
+  margin-top: 5px;
+}
+
+.star {
+  font-size: 30px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.star.empty {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.star.filled {
+  color: #e4e900;
+}
+
+.star:hover {
+  transform: scale(1.1);
+}
+
+.movie-form-container {
+  flex: 1;
+}
+
+.movie-title {
+  color: #fff;
+  font-size: 48px;
+  font-weight: 600;
+  margin-bottom: 40px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  color: #fff;
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-container input,
+.input-container textarea {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  font-size: 16px;
+  background-color: #fff;
+}
+
+.input-container textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .movie-detail-content {
+    flex-direction: column;
+    padding-bottom: 20px;
+  }
+
+  .movie-poster-container {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
+  .movie-poster-placeholder {
+    width: 100%;
+  }
+
+  .star-rating-container {
+    justify-content: center;
+  }
+}
