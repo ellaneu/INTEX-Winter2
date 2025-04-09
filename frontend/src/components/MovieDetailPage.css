@@ -18,6 +18,30 @@
   background-color: #1a1a1a;
 }
 
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.back-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: white;
+  transition: transform 0.2s ease;
+}
+
+.back-arrow:hover {
+  transform: translateX(-3px);
+}
+
+.back-arrow svg {
+  width: 24px;
+  height: 24px;
+}
+
 .movie-detail-logo {
   color: #fff;
   font-size: 24px;

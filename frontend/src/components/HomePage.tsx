@@ -96,7 +96,6 @@ const HomePage: React.FC = () => {
         <div className="brand-logo">CineNiche</div>
         <nav className="nav-links">
           <div className="nav-item active">HOME</div>
-          <div className="nav-item">ABOUT</div>
           <div className="nav-item" onClick={handleLogin}>
             LOGIN
           </div>
@@ -112,19 +111,23 @@ const HomePage: React.FC = () => {
             GET STARTED
           </button>
         </div>
+        <img src="/imgs/chair.png" className="round-image" width="500" />
       </section>
 
       {/* Info Section */}
       <section className="info-section">
-        <div className="info-content">
-          <h2 className="info-title">
-            Movies don't have to be mainstream to be meaningful.
-          </h2>
-          <p className="info-text">
-            CineNiche is here to help you discover and appreciate films on their
-            own merit, not just based on their box office success.
-          </p>
-          <button className="learn-more-btn">LEARN MORE</button>
+        <div className="info-container">
+          <div className="info-content">
+            <h2 className="info-title">
+              Movies don't have to be mainstream to be meaningful.
+            </h2>
+            <p className="info-text">
+              CineNiche is here to help you discover and appreciate films on
+              their own merit, not just based on their box office success.
+            </p>
+            <button className="learn-more-btn">LEARN MORE</button>
+          </div>
+          <img src="/imgs/arrow.png" width="500" />
         </div>
       </section>
 
@@ -157,7 +160,14 @@ const HomePage: React.FC = () => {
 
       {/* Features Section */}
       <section className="features-section">
-        <h2 className="features-title">Reasons to Join</h2>
+        <div className="header-and-image">
+          <h2 className="features-title">Reasons to Join</h2>
+          <img
+            src="/imgs/filmCamera.png"
+            alt="Descriptive Alt Text"
+            className="features-image"
+          />
+        </div>
         <div className="features-grid">
           <div className="feature-card">
             <h3 className="feature-card-title">Personalized Recommendations</h3>
@@ -308,6 +318,7 @@ const HomePage: React.FC = () => {
             <div className="footer-link">Twitter</div>
           </div>
         </div>
+        {/* <img src="/imgs/popcorn.png" width="400"/> */}
       </section>
 
       {/* Footer */}

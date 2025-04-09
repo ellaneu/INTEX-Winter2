@@ -3,7 +3,7 @@
 .home-container {
   font-family: "Inter", sans-serif;
   color: #fff;
-  background-color: #121111;
+  background-color: #000000;
   width: 100%;
   overflow-x: hidden;
   overflow-y: auto;
@@ -21,7 +21,7 @@
   position: sticky;
   top: 0;
   z-index: 100;
-  background-color: rgba(18, 17, 17, 0.95);
+  background-color:#000000;
 }
 
 .brand-logo {
@@ -53,17 +53,18 @@
   min-height: 400px;
   text-align: center;
   padding: 60px 20px;
-  background: linear-gradient(135deg, #e4e801 0%, #018ea6 100%);
+  background: #000000;
   background-size: cover;
   background-position: center;
 }
 
 .hero-content {
   max-width: 600px;
+  
 }
 
 .hero-title {
-  font-size: 48px;
+  font-size: 100px;
   font-weight: 700;
   margin-bottom: 10px;
   color: #fff;
@@ -71,7 +72,7 @@
 }
 
 .hero-subtitle {
-  font-size: 24px;
+  font-size: 36px;
   margin-bottom: 30px;
   font-weight: normal;
   color: #fff;
@@ -94,11 +95,26 @@
 }
 
 /* Info Section */
+
 .info-section {
   padding: 60px 20px;
   display: flex;
   justify-content: center;
-  background-color: #f5f5f5;
+  background-color: white; /* ✅ soft gray background */
+}
+
+.info-container {
+  border: 2px solid black; /* ✅ black border */
+  border-radius: 30px;      /* ✅ rounded corners */
+  background-color: white;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  max-width: 1450px;
+  width: 100%;
+  box-shadow: none;         /* ✅ remove shadow if any */
 }
 
 .info-content {
@@ -122,7 +138,7 @@
 }
 
 .learn-more-btn {
-  background-color: #121111;
+  background-color: #018ea6;
   color: #fff;
   padding: 12px 30px;
   border-radius: 4px;
@@ -244,32 +260,48 @@
   color: #000;
   background-color: #fff;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.header-and-image {
+  flex: 1; /* Takes up 1 part of the flex container */
+  padding: 20px;
+  display: flex;
+  flex-direction: column; /* Stack header and image vertically */
+  align-items: flex-start; /* Aligns content to the left */
 }
 
 .features-title {
-  font-size: 32px;
+  font-size: 40px;
   font-weight: 700;
   margin-bottom: 40px;
   text-align: center;
 }
 
 .features-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 30px;
-  max-width: 1200px;
-  margin: 0 auto;
+  flex: 2; /* Takes up 2 parts of the flex container, giving it more space */
+  display: flex;
+  flex-direction: column; /* Keeps cards stacked vertically */
+  padding: 20px;
+  gap: 20px;
+}
+
+.features-image {
+  width: 100%;
+  height: auto;
+  margin-top: 20px; /* Adds space between the header and the image */
 }
 
 .feature-card {
   padding: 20px;
-  background-color: #f9f9f9;
+  background-color: #018ea6;
+  color: white;
   border-radius: 8px;
   transition:
     transform 0.3s ease,
     box-shadow 0.3s ease;
+  border: 2px solid #018ea6;
 }
 
 .feature-card:hover {
@@ -277,11 +309,17 @@
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
+.feature-card,
+.feature-card h3, /* Targeting headers specifically */
+.feature-card p { /* Targeting paragraphs specifically */
+  color: #fff; /* White text for all content inside the card */
+}
+
 .feature-card-title {
-  font-size: 20px;
+  font-size: 25px;
   font-weight: 600;
   margin-bottom: 15px;
-  color: #121111;
+  color: white;
 }
 
 .feature-card-text {
@@ -517,10 +555,12 @@
 
 /* Responsive Styles */
 @media (max-width: 768px) {
-  .home-header {
-    padding: 15px 20px;
-    flex-direction: column;
-    gap: 15px;
+  .features-section {
+    flex-direction: column; /* Stack elements vertically on smaller screens */
+  }
+
+  .header-and-image, .features-grid {
+    width: 100%; /* Full width on smaller screens */
   }
 
   .hero-title {
@@ -571,4 +611,14 @@
   .movie-grid {
     grid-template-columns: 1fr;
   }
+
+  .round-image {
+    width: 150px;       /* or any size you want */
+    height: 150px;
+    object-fit: cover;  /* keeps the image from stretching */
+    border-radius: 50%; /* makes it round */
+  }
+
+
+  
 }
