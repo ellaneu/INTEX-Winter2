@@ -1,182 +1,140 @@
-import React, { useState } from "react";
+import React from "react";
 import "./MovieDetailPage.css";
 
-interface MovieDetailFormData {
-  director: string;
-  cast: string;
-  country: string;
-  releaseYear: string;
-  duration: string;
-  description: string;
-  rating: number;
+interface MovieDetailPageProps {
+  movie?: {
+    id: number;
+    title: string;
+    year: number;
+    rating: string;
+    duration: string;
+    description: string;
+    director: string;
+    cast: string;
+    country: string;
+    type: string;
+    image: string;
+    starRating: number;
+  };
 }
 
-const MovieDetailPage: React.FC = () => {
-  const [rating, setRating] = useState<number>(0);
-  const [formData, setFormData] = useState<MovieDetailFormData>({
-    director: "",
-    cast: "",
-    country: "",
-    releaseYear: "",
-    duration: "",
-    description: "",
-    rating: 0,
-  });
-
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
+const MovieDetailPage: React.FC<MovieDetailPageProps> = ({ movie }) => {
+  const [userRating, setUserRating] = React.useState<number | null>(null);
+  const [ratingType, setRatingType] = React.useState<"average" | "my">(
+    "average",
+  );
+  // Default movie data if none is provided
+  const defaultMovie = {
+    id: 1,
+    title: "Dick Johnson Is Dead",
+    year: 2020,
+    rating: "PG-13",
+    duration: "90 min",
+    description:
+      "As her father nears the end of his life filmmaker Kirsten Johnson stages his death in inventive and comical ways to help them both face the inevitable.",
+    director: "Kirsten Johnson",
+    cast: "Michael Hilow, Ana Hoffman, Dick Johnson, Kirsten Johnson, Chad Knorr",
+    country: "United States",
+    type: "Movie",
+    image: "/imgs/movie-detail.jpg",
+    starRating: 5,
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log("Form submitted:", formData);
-    // Here you would typically send the data to an API
+  const movieData = movie || defaultMovie;
+
+  // Generate star rating elements
+  const renderStars = () => {
+    const stars = [];
+    // Use user rating when "my" is selected and user has rated, otherwise use movie rating
+    const currentRating =
+      ratingType === "my" && userRating !== null
+        ? userRating
+        : movieData.starRating;
+
+    for (let i = 0; i < 5; i++) {
+      stars.push(
+        <div
+          key={i}
+          className={`star ${i < currentRating ? "filled" : "empty"}`}
+          onClick={() => handleStarClick(i + 1)}
+          onMouseEnter={() => handleStarHover(i + 1)}
+          onMouseLeave={handleStarLeave}
+          title={`Rate ${i + 1} stars`}
+        ></div>,
+      );
+    }
+    return stars;
+  };
+
+  // Handle star click for rating
+  const handleStarClick = (rating: number) => {
+    setUserRating(rating);
+    setRatingType("my"); // Switch to "My Rating" when user rates
+    console.log(`You rated this movie ${rating} stars`);
+    // Here you would typically send this rating to your backend
+  };
+
+  // Handle rating type toggle
+  const handleRatingTypeChange = (type: "average" | "my") => {
+    setRatingType(type);
+  };
+
+  // Handle star hover for preview
+  const [hoverRating, setHoverRating] = React.useState<number | null>(null);
+
+  const handleStarHover = (rating: number) => {
+    setHoverRating(rating);
+  };
+
+  const handleStarLeave = () => {
+    setHoverRating(null);
   };
 
   return (
     <div className="movie-detail-container">
-      <header className="movie-detail-header">
-        <div className="logo-container">
-          <div
-            className="back-arrow"
-            onClick={() => window.history.back()}
-            title="Go back"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              width="24"
-              height="24"
-              fill="currentColor"
-            >
-              <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
-            </svg>
-          </div>
-          <div className="movie-detail-logo">CINENICHE</div>
-        </div>
-        <div className="movie-detail-nav">
-          <div className="profile-icon" title="User Profile">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              width="24"
-              height="24"
-              fill="currentColor"
-            >
-              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z" />
-            </svg>
-          </div>
-        </div>
-      </header>
-
       <div className="movie-detail-content">
-        <div className="movie-poster-container">
-          <div className="movie-poster-placeholder"></div>
-          <div className="star-rating-container">
-            {[1, 2, 3, 4, 5].map((star) => (
-              <span
-                key={star}
-                className={`star ${star <= rating ? "filled" : "empty"}`}
-                onClick={() => {
-                  setRating(star);
-                  setFormData((prev) => ({ ...prev, rating: star }));
-                }}
-                onMouseEnter={() => setRating(star)}
-                onMouseLeave={() => setRating(formData.rating)}
-              >
-                ★
-              </span>
-            ))}
-          </div>
+        <div className="movie-poster">
+          <img src="/imgs/dickJohnson.jpg" alt={movieData.title} />
         </div>
-
-        <div className="movie-form-container">
-          <h1 className="movie-title">Movie Name</h1>
-
-          <form onSubmit={handleSubmit}>
-            <div className="form-group">
-              <label htmlFor="director">Director:</label>
-              <div className="input-container">
-                <input
-                  type="text"
-                  id="director"
-                  name="director"
-                  value={formData.director}
-                  onChange={handleInputChange}
-                />
-              </div>
+        <div className="movie-info">
+          <h1 className="movie-title">{movieData.title}</h1>
+          <div className="movie-meta">
+            {movieData.year} | {movieData.rating} | {movieData.duration}
+          </div>
+          <div className="rating-toggle">
+            <button
+              className={`toggle-btn ${ratingType === "average" ? "active" : ""}`}
+              onClick={() => handleRatingTypeChange("average")}
+            >
+              Average Rating
+            </button>
+            <button
+              className={`toggle-btn ${ratingType === "my" ? "active" : ""}`}
+              onClick={() => handleRatingTypeChange("my")}
+            >
+              My Rating {userRating ? `(${userRating}/5)` : ""}
+            </button>
+          </div>
+          <div className="star-rating">{renderStars()}</div>
+          <div className="movie-description">{movieData.description}</div>
+          <div className="movie-details">
+            <div className="detail-row">
+              <div className="detail-label">Director:</div>
+              <div className="detail-value">{movieData.director}</div>
             </div>
-
-            <div className="form-group">
-              <label htmlFor="cast">Cast</label>
-              <div className="input-container">
-                <input
-                  type="text"
-                  id="cast"
-                  name="cast"
-                  value={formData.cast}
-                  onChange={handleInputChange}
-                />
-              </div>
+            <div className="detail-row">
+              <div className="detail-label">Cast:</div>
+              <div className="detail-value">{movieData.cast}</div>
             </div>
-
-            <div className="form-group">
-              <label htmlFor="country">Country:</label>
-              <div className="input-container">
-                <input
-                  type="text"
-                  id="country"
-                  name="country"
-                  value={formData.country}
-                  onChange={handleInputChange}
-                />
-              </div>
+            <div className="detail-row">
+              <div className="detail-label">Country:</div>
+              <div className="detail-value">{movieData.country}</div>
             </div>
-
-            <div className="form-group">
-              <label htmlFor="releaseYear">Release Year:</label>
-              <div className="input-container">
-                <input
-                  type="text"
-                  id="releaseYear"
-                  name="releaseYear"
-                  value={formData.releaseYear}
-                  onChange={handleInputChange}
-                />
-              </div>
+            <div className="detail-row">
+              <div className="detail-label">Type:</div>
+              <div className="detail-value">{movieData.type}</div>
             </div>
-
-            <div className="form-group">
-              <label htmlFor="duration">Duration:</label>
-              <div className="input-container">
-                <input
-                  type="text"
-                  id="duration"
-                  name="duration"
-                  value={formData.duration}
-                  onChange={handleInputChange}
-                />
-              </div>
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="description">Description</label>
-              <div className="input-container">
-                <textarea
-                  id="description"
-                  name="description"
-                  value={formData.description}
-                  onChange={handleInputChange}
-                />
-              </div>
-            </div>
-          </form>
+          </div>
         </div>
       </div>
     </div>

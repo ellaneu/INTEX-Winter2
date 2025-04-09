@@ -11,6 +11,7 @@ const trendingMovies = [
     year: 2019,
     rating: 4.5,
     image: "/imgs/movie1.jpg",
+    detailUrl: "/movie/1",
   },
   {
     id: 2,
@@ -19,6 +20,7 @@ const trendingMovies = [
     year: 2019,
     rating: 4.8,
     image: "/imgs/movie2.jpg",
+    detailUrl: "/movie/2",
   },
   {
     id: 3,
@@ -27,6 +29,7 @@ const trendingMovies = [
     year: 2019,
     rating: 4.6,
     image: "/imgs/movie3.jpg",
+    detailUrl: "/movie/3",
   },
   {
     id: 4,
@@ -35,6 +38,7 @@ const trendingMovies = [
     year: 2020,
     rating: 4.7,
     image: "/imgs/movie4.jpg",
+    detailUrl: "/movie/4",
   },
 ];
 
@@ -46,6 +50,7 @@ const topRatedMovies = [
     year: 2016,
     rating: 4.9,
     image: "/imgs/movie5.jpg",
+    detailUrl: "/movie/5",
   },
   {
     id: 6,
@@ -54,6 +59,7 @@ const topRatedMovies = [
     year: 2016,
     rating: 4.8,
     image: "/imgs/movie6.jpg",
+    detailUrl: "/movie/6",
   },
   {
     id: 7,
@@ -62,6 +68,7 @@ const topRatedMovies = [
     year: 2020,
     rating: 4.7,
     image: "/imgs/movie7.jpg",
+    detailUrl: "/movie/7",
   },
   {
     id: 8,
@@ -70,6 +77,7 @@ const topRatedMovies = [
     year: 2019,
     rating: 4.6,
     image: "/imgs/movie8.jpg",
+    detailUrl: "/movie/8",
   },
 ];
 
@@ -139,7 +147,11 @@ const HomePage: React.FC = () => {
         </div>
         <div className="movie-grid">
           {trendingMovies.map((movie) => (
-            <div key={movie.id} className="movie-card">
+            <div
+              key={movie.id}
+              className="movie-card"
+              onClick={() => navigate(movie.detailUrl)}
+            >
               <div
                 className="movie-poster"
                 style={{ backgroundImage: `url(${movie.image})` }}
@@ -202,7 +214,11 @@ const HomePage: React.FC = () => {
         </div>
         <div className="movie-grid">
           {topRatedMovies.map((movie) => (
-            <div key={movie.id} className="movie-card">
+            <div
+              key={movie.id}
+              className="movie-card"
+              onClick={() => navigate(movie.detailUrl)}
+            >
               <div
                 className="movie-poster"
                 style={{ backgroundImage: `url(${movie.image})` }}
@@ -289,7 +305,16 @@ const HomePage: React.FC = () => {
         </div>
       </section>
       {/* CTA Section */}
-      <section className="cta-section">
+      <section
+        className="cta-section"
+        style={{
+          background: "linear-gradient(135deg, #018fa6 0%, #e4e801 100%)",
+          padding: "60px 40px",
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr",
+          gap: "40px",
+        }}
+      >
         <div className="cta-content">
           <h2 className="cta-title">Start exploring new films today</h2>
           <p className="cta-text">
@@ -318,7 +343,7 @@ const HomePage: React.FC = () => {
             <div className="footer-link">Twitter</div>
           </div>
         </div>
-        {/* <img src="/imgs/popcorn.png" width="400"/> */}
+        <img src="/imgs/popcorn.png" width="400" alt="Popcorn" />
       </section>
 
       {/* Footer */}

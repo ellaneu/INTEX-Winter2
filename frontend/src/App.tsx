@@ -24,7 +24,7 @@ function App() {
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/home-view" element={<HomeView />} />
           <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/movieDetail" element={<MovieDetailPage/>}/>
+          <Route path="/movie/:id" element={<MovieDetailPage />} />
         </Routes>
       </div>
     </Router>
