@@ -1,15 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
 import "./HomeView.css";
+import ProfilePage from "./ProfilePage"; // Corrected import statement
 
 const HomeView: React.FC = () => {
+  const [showProfile, setShowProfile] = useState(false);
+
+  const profileData = {
+    name: "Ella Neumarker",
+    phoneNumber: "123-456-7890",
+    email: "ella@example.com",
+  };
+
+  const handleLogout = () => {
+    console.log("User logged out");
+    setShowProfile(false); // close the dropdown
+  };
+
   return (
     <div className="home-view-container">
+      <div>
+        {showProfile && (
+          <ProfilePage
+            profileData={profileData}
+            onClose={() => setShowProfile(false)}
+            onLogout={handleLogout}
+          />
+        )}
+      </div>
+
       {/* Header */}
       <header className="home-view-header">
         <div className="brand-logo">CINENICHE</div>
         <div className="header-icons">
           <div className="header-icon search-icon"></div>
-          <div className="header-icon user-icon"></div>
+          <div
+            className="header-icon user-icon"
+            onClick={() => setShowProfile((prev) => !prev)}
+          ></div>
         </div>
       </header>
 
@@ -37,7 +64,6 @@ const HomeView: React.FC = () => {
       <section className="recommendation-section">
         <h2 className="section-title">RECOMMENDED FOR YOU</h2>
         <div className="movie-row">
-          {/* Movie cards would go here */}
           <div className="movie-card">
             <div className="movie-poster"></div>
             <div className="movie-info">
@@ -45,99 +71,10 @@ const HomeView: React.FC = () => {
               <p className="movie-details">2023 • Drama</p>
             </div>
           </div>
-          <div className="movie-card">
-            <div className="movie-poster"></div>
-            <div className="movie-info">
-              <h3 className="movie-title">Movie Title</h3>
-              <p className="movie-details">2023 • Drama</p>
-            </div>
-          </div>
-          <div className="movie-card">
-            <div className="movie-poster"></div>
-            <div className="movie-info">
-              <h3 className="movie-title">Movie Title</h3>
-              <p className="movie-details">2023 • Drama</p>
-            </div>
-          </div>
-          <div className="movie-card">
-            <div className="movie-poster"></div>
-            <div className="movie-info">
-              <h3 className="movie-title">Movie Title</h3>
-              <p className="movie-details">2023 • Drama</p>
-            </div>
-          </div>
+          {/* More movie cards */}
         </div>
       </section>
-
-      <section className="recommendation-section">
-        <h2 className="section-title">BECAUSE YOU WATCHED: WICKED</h2>
-        <div className="movie-row">
-          {/* Movie cards would go here */}
-          <div className="movie-card">
-            <div className="movie-poster"></div>
-            <div className="movie-info">
-              <h3 className="movie-title">Movie Title</h3>
-              <p className="movie-details">2023 • Drama</p>
-            </div>
-          </div>
-          <div className="movie-card">
-            <div className="movie-poster"></div>
-            <div className="movie-info">
-              <h3 className="movie-title">Movie Title</h3>
-              <p className="movie-details">2023 • Drama</p>
-            </div>
-          </div>
-          <div className="movie-card">
-            <div className="movie-poster"></div>
-            <div className="movie-info">
-              <h3 className="movie-title">Movie Title</h3>
-              <p className="movie-details">2023 • Drama</p>
-            </div>
-          </div>
-          <div className="movie-card">
-            <div className="movie-poster"></div>
-            <div className="movie-info">
-              <h3 className="movie-title">Movie Title</h3>
-              <p className="movie-details">2023 • Drama</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="recommendation-section">
-        <h2 className="section-title">COMEDY MOVIES</h2>
-        <div className="movie-row">
-          {/* Movie cards would go here */}
-          <div className="movie-card">
-            <div className="movie-poster"></div>
-            <div className="movie-info">
-              <h3 className="movie-title">Movie Title</h3>
-              <p className="movie-details">2023 • Comedy</p>
-            </div>
-          </div>
-          <div className="movie-card">
-            <div className="movie-poster"></div>
-            <div className="movie-info">
-              <h3 className="movie-title">Movie Title</h3>
-              <p className="movie-details">2023 • Comedy</p>
-            </div>
-          </div>
-          <div className="movie-card">
-            <div className="movie-poster"></div>
-            <div className="movie-info">
-              <h3 className="movie-title">Movie Title</h3>
-              <p className="movie-details">2023 • Comedy</p>
-            </div>
-          </div>
-          <div className="movie-card">
-            <div className="movie-poster"></div>
-            <div className="movie-info">
-              <h3 className="movie-title">Movie Title</h3>
-              <p className="movie-details">2023 • Comedy</p>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* More recommendation sections */}
     </div>
   );
 };

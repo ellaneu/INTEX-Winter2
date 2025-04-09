@@ -9,6 +9,7 @@ import SearchPage from "./components/SearchPage";
 import PrivacyPolicy from "./components/PrivacyPolicy";
 import HomeView from "./components/HomeView";
 import MovieDetailPage from "./components/MovieDetailPage";
+import ProfilePage from "./components/ProfilePage";
 
 function App() {
   return (
@@ -22,11 +23,11 @@ function App() {
           <Route path="/search" element={<SearchPage />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/home-view" element={<HomeView />} />
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/movieDetail" element={<MovieDetailPage/>}/>
         </Routes>
       </div>
     </Router>
-
-    
   );
 }
 
